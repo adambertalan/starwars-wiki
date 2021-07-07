@@ -1,8 +1,6 @@
 import { Species } from "./Species.model";
+import { SWApiResult } from "./SWApiResult.model";
 
-export interface SpeciesResult {
-    count: number;
-    next: string;
-    previous: string;
+export interface SpeciesResult extends SWApiResult {
     results: Species[];
 }

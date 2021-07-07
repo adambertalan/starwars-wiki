@@ -1,32 +1,63 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, MouseEvent } from 'react';
 import Loading from '../components/Loading';
 import { Species } from '../models/Species.model';
 import { SpeciesResult } from '../models/SpeciesResult.model';
+import { useHistory } from 'react-router-dom';
+import { fetchSpecies } from '../api';
+import { Button, Card, CardContent, Container, List, ListItem, ListItemText } from '@material-ui/core';
 
-const HomePage = () => {
+interface Props {
+    updateHeader: (headerTitle: string) => void;
+}
+
+const HomePage = ({ updateHeader }: Props) => {
     const [species, setSpecies] = useState<Species[]>([]);
+    const [nextPageUrl, setNextPageUrl] = useState<string>("");
+
+    const history = useHistory();
 
     useEffect(() => {
         const fetchData = async () => {
-            setSpecies(await fetchSpecies());
-        }
+            updateHeader("Home Page");
 
+            const speciesResult: SpeciesResult = await fetchSpecies();
+
+            setSpecies(speciesResult.results);
+            setNextPageUrl(speciesResult.next ?? "");
+        };
+        
         fetchData();
-    }, []);
+    }, [updateHeader]);
 
-    const fetchSpecies = async (): Promise<Species[]> => {
-        const res: Response = await fetch(`https://swapi.dev/api/species`);
-        const data: SpeciesResult = await res.json();
-        return data.results;
+
+    const loadMoreSpecies = async (e: MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+        const speciesResult: SpeciesResult = await fetchSpecies(nextPageUrl);
+
+        setSpecies([...species, ...speciesResult.results]);
+        setNextPageUrl(speciesResult.next ?? "");
     }
 
     return (
-        <div>
-            HomePage
-            {species.length > 0 ? species.map(s => (
-                <h2 key={s.name}>{s.name}</h2>
-            )): <Loading />}
-        </div>
+        <Container maxWidth="sm" style={{paddingTop: '1em'}}>
+            <Card>
+                <CardContent>
+                    <List>
+                        {species.length > 0 ? species.map(s => (
+                            <ListItem key={s.id} component="button" button
+                                onClick={() => history.push(`/species/${s.id}`)}>
+                                <ListItemText primary={s.name} />
+                            </ListItem>
+                        )): <Loading />}
+                    </List>
+                    {nextPageUrl && (
+                        <Button color="primary" onClick={loadMoreSpecies}>
+                            Load more species
+                        </Button>
+                    )}
+                </CardContent>
+            </Card>
+        </Container>
     )
 }
 

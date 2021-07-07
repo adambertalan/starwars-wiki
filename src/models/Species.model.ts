@@ -1,9 +1,7 @@
-type URLString = string;
-type TimestampString = string;
-type NumberString = string;
-type CommaSeparatedString = string;
+import { Identifiable } from './Identifiable.model';
+import { CommaSeparatedString, NumberString, DateString, URLString } from "./types";
 
-export interface Species {
+export interface Species extends Identifiable {
     name: string;
     classification: string;
     designation: string;
@@ -16,7 +14,6 @@ export interface Species {
     language: string;
     people: URLString[];
     films: URLString[];
-    created: TimestampString;
-    edited: TimestampString;
-    url: URLString;
+    created: DateString;
+    edited: DateString;
 }

@@ -1,46 +1,37 @@
-# Getting Started with Create React App
+# Star Wars wiki
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Simple application for consuming the https://swapi.dev API.
 
-## Available Scripts
+The wiki page consists of 3 pages.
 
-In the project directory, you can run:
+## Home page
 
-### `yarn start`
+The home page contains a list of species from the swapi.
+By selecting a species the Characters page loads.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Characters page
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+The characters page lists all the characters that belongs to the a selected species.
+You can select a character from this list to learn more about them.
 
-### `yarn test`
+## Profile page
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The profile page shows detailed information about a previously selected character.
 
-### `yarn build`
+## Search functionality
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+On each page, at the navigation bar, you can use the search input to search for characters. By clicking on a search result, the character's profile page is loaded.
+## How to run locally
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. Open a terminal and go to the project's root folder.
+2. Run `yarn start` or `npm start`
+3. Open a browser on http://localhost:3000
+4. Profit
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Build production version for deployment
 
-### `yarn eject`
+1. Open a terminal and go to the project's root folder.
+2. Run `yarn build` or `npm build`
+3. Check out the `build` folder, it contains the production version which needs to be served from a web server.
+4. Profit
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
