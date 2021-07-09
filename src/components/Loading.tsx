@@ -1,11 +1,12 @@
-import { CircularProgress } from "@material-ui/core"
+import React from 'react';
+import { CircularProgress } from "@material-ui/core";
 
-const Loading = () => {
-    return (
-        <div>
-            <CircularProgress />
-        </div>
-    )
-}
+const Loading = (): JSX.Element => {
+  return (
+    <div>
+      <CircularProgress />
+    </div>
+  );
+};
 
-export default Loading
+export default Loading;

@@ -24,14 +24,16 @@ On each page, at the navigation bar, you can use the search input to search for 
 ## How to run locally
 
 1. Open a terminal and go to the project's root folder.
-2. Run `yarn start` or `npm start`
-3. Open a browser on http://localhost:3000
-4. Profit
+2. Install dependencies by running `yarn install` or `npm install`
+3. Run `yarn start` or `npm start`
+4. Open a browser on http://localhost:3000
+5. Profit
 
 ## Build production version for deployment
 
 1. Open a terminal and go to the project's root folder.
-2. Run `yarn build` or `npm build`
-3. Check out the `build` folder, it contains the production version which needs to be served from a web server.
-4. Profit
+2. Install dependencies by running `yarn install` or `npm install`
+3. Run `yarn build` or `npm build`
+4. Check out the `build` folder, it contains the production version which needs to be served from a web server.
+5. Profit
 
