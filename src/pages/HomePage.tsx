@@ -47,7 +47,7 @@ const HomePage = ({ updateHeader }: Props): JSX.Element => {
   };
 
   return (
-    <Container maxWidth="sm" style={{ paddingTop: "1em" }}>
+    <Container maxWidth="sm" className="page-container">
       <Card>
         <CardContent>
           <List>

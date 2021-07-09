@@ -13,3 +13,23 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.page-container {
+  padding-top: 1em;
+}
+
+.pt-1em {
+  padding-top: 1em;
+}
+
+.pb-1em {
+  padding-bottom: 1em;
+}
+
+.pl-1em {
+  padding-left: 1em;
+}
+
+.pr-1em {
+  padding-right: 1em;
+}

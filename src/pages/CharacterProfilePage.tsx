@@ -85,74 +85,76 @@ const CharacterProfilePage = ({ updateHeader }: Props): JSX.Element => {
     fetchData();
   }, [characterId, updateHeader]);
 
+  const renderSectionTitle = (title: string, clazz?: string) => (
+    <Typography variant="h4" className={clazz ?? ""}>
+        {title}
+    </Typography>
+  )
+
   return (
-    <div>
-      {character != null ? (
-        <Container maxWidth="sm" style={{ paddingTop: "1em" }}>
-          <Typography variant="h4" style={{ paddingBottom: "1em" }}>
-            Basic information
-          </Typography>
-          <TableContainer component={Paper}>
-            <Table>
-              <TableBody>
-                <TableRow>
-                  <TableCell>Name</TableCell>
-                  <TableCell>{character.name}</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>Birth year</TableCell>
-                  <TableCell>{character.birth_year}</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>Gender</TableCell>
-                  <TableCell>{character.gender}</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>Eye color</TableCell>
-                  <TableCell>{character.eye_color}</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>Hair color</TableCell>
-                  <TableCell>{character.hair_color}</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>Skin color</TableCell>
-                  <TableCell>{character.skin_color}</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>Height</TableCell>
-                  <TableCell>{character.height}</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>Mass</TableCell>
-                  <TableCell>{character.mass}</TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
-          </TableContainer>
-          <Typography variant="h4" style={{ paddingTop: "1em" }}>
-            Appears in movies
-          </Typography>
-          <List dense={true}>
-            {filmTitles.map((title) => (
-              <ListItem key={title}>
-                <ListItemText primary={title} />
-              </ListItem>
-            ))}
-          </List>
-          <Typography variant="h4">Species belongs to</Typography>
-          <List dense={true}>
-            {speciesNames.map((speciesName) => (
-              <ListItem key={speciesName}>
-                <ListItemText primary={speciesName} />
-              </ListItem>
-            ))}
-          </List>
-        </Container>
-      ) : (
-        <Loading />
-      )}
-    </div>
+    <Container maxWidth="sm" className="page-container">
+        {character != null ? (
+            <>
+                {renderSectionTitle("Basic information", "pb-1em")}
+                <TableContainer component={Paper}>
+                <Table>
+                    <TableBody>
+                    <TableRow>
+                        <TableCell>Name</TableCell>
+                        <TableCell>{character.name}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell>Birth year</TableCell>
+                        <TableCell>{character.birth_year}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell>Gender</TableCell>
+                        <TableCell>{character.gender}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell>Eye color</TableCell>
+                        <TableCell>{character.eye_color}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell>Hair color</TableCell>
+                        <TableCell>{character.hair_color}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell>Skin color</TableCell>
+                        <TableCell>{character.skin_color}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell>Height</TableCell>
+                        <TableCell>{character.height}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell>Mass</TableCell>
+                        <TableCell>{character.mass}</TableCell>
+                    </TableRow>
+                    </TableBody>
+                </Table>
+                </TableContainer>
+                {renderSectionTitle("Appears in movies", "pt-1em")}
+                <List dense>
+                    {filmTitles.map((title) => (
+                        <ListItem key={title}>
+                        <ListItemText primary={title} />
+                        </ListItem>
+                    ))}
+                </List>
+                {renderSectionTitle("Species belongs to")}
+                <List dense={true}>
+                {speciesNames.map((speciesName) => (
+                    <ListItem key={speciesName}>
+                    <ListItemText primary={speciesName} />
+                    </ListItem>
+                ))}
+                </List>
+            </>
+        ) : (
+            <Loading />
+        )}
+      </Container>
   );
 };
 

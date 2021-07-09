@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardContent, InputBase, Popper } from "@material-ui/core";
+import { Card, CardContent } from "@material-ui/core";
 import { ChangeEvent, useEffect, useMemo, useRef, useState } from "react";
 import {
   debounceTime,
@@ -8,9 +8,10 @@ import {
   Subscription,
   Subject,
 } from "rxjs";
-import { fetchCharacters } from "../api";
-import { Character } from "../models/Character.model";
-import SearchDialog from "./SearchDialog";
+import { fetchCharacters } from "../../api";
+import { Character } from "../../models/Character.model";
+import SearchDialog from "../SearchDialog";
+import { GlobalSearchInput, GlobalSearchResultPopup } from './styles';
 
 const GlobalSearch = (): JSX.Element => {
   const [searchExpression, setSearchExpression] = useState<string>("");
@@ -72,8 +73,7 @@ const GlobalSearch = (): JSX.Element => {
 
   return (
     <>
-      <InputBase
-        style={{ color: "white" }}
+      <GlobalSearchInput
         ref={inputRef}
         onClick={() => setSearchInputFocused(true)}
         onBlur={() => searchResultPopupBlur$.next()}
@@ -81,10 +81,9 @@ const GlobalSearch = (): JSX.Element => {
         value={searchExpression}
         onChange={handleSearch}
       />
-      <Popper
+      <GlobalSearchResultPopup
         open={searchExpression.trim().length > 0 && searchInputFocused}
         anchorEl={inputRef.current}
-        style={{ zIndex: 10001 }}
       >
         <Card>
           <CardContent>
@@ -97,7 +96,7 @@ const GlobalSearch = (): JSX.Element => {
             )}
           </CardContent>
         </Card>
-      </Popper>
+      </GlobalSearchResultPopup>
     </>
   );
 };

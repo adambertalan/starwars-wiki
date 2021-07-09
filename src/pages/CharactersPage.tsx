@@ -44,7 +44,7 @@ const CharactersPage = ({ updateHeader }: Props): JSX.Element => {
   }, [speciesId, updateHeader]);
 
   return (
-    <Container maxWidth="sm" style={{ paddingTop: "1em" }}>
+    <Container maxWidth="sm" className="page-container">
       <Card>
         <CardContent>
           <List>

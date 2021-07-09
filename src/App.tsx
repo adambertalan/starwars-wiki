@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 
-import Header from "./components/Header";
+import Header from "./components/Header/Header";
 import HomePage from "./pages/HomePage";
 
-import "./App.css";
 import CharactersPage from "./pages/CharactersPage";
 import CharacterProfilePage from "./pages/CharacterProfilePage";
 
