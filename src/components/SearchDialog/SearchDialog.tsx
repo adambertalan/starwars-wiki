@@ -1,8 +1,8 @@
 import React from 'react';
 import { List, ListItem, ListItemText } from "@material-ui/core";
-import { useHistory } from "react-router";
-import { Character } from "../models/Character.model";
-import Loading from "./Loading";
+import { useHistory } from "react-router-dom";
+import { Character } from "../../models/Character.model";
+import Loading from "../Loading/Loading";
 
 interface Props {
   items: Character[];
@@ -20,6 +20,7 @@ const SearchDialog = ({ items, isLoading }: Props): JSX.Element => {
         <ListItem
           key={item.id}
           component="button"
+          data-testid={`search-result-${item.id}`}
           button
           onClick={() => history.push(`/character/${item.id}`)}
         >

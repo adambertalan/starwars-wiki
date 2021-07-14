@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 
 import Header from "./components/Header/Header";
-import HomePage from "./pages/HomePage";
+import HomePage from "./pages/HomePage/HomePage";
 
-import CharactersPage from "./pages/CharactersPage";
-import CharacterProfilePage from "./pages/CharacterProfilePage";
+import CharactersPage from "./pages/CharactersPage/CharactersPage";
+import CharacterProfilePage from "./pages/CharacterProfilePage/CharacterProfilePage";
 
 function App(): JSX.Element {
   const [header, setHeader] = useState<string>("Home page");

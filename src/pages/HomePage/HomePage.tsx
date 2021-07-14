@@ -1,10 +1,7 @@
 import React from "react";
-import { useEffect, useState, MouseEvent } from "react";
-import Loading from "../components/Loading";
-import { Species } from "../models/Species.model";
-import { SpeciesResult } from "../models/SpeciesResult.model";
+import { useEffect } from "react";
+import Loading from "../../components/Loading/Loading";
 import { useHistory } from "react-router-dom";
-import { fetchSpecies } from "../api";
 import {
   Button,
   Card,
@@ -14,44 +11,28 @@ import {
   ListItem,
   ListItemText,
 } from "@material-ui/core";
+import { useSpecies } from "./useSpecies";
 
 interface Props {
   updateHeader: (headerTitle: string) => void;
 }
 
 const HomePage = ({ updateHeader }: Props): JSX.Element => {
-  const [species, setSpecies] = useState<Species[]>([]);
-  const [nextPageUrl, setNextPageUrl] = useState<string>("");
 
   const history = useHistory();
+  const { loading, species, nextPageUrl, loadMoreSpecies } = useSpecies();
 
   useEffect(() => {
-    const fetchData = async () => {
-      updateHeader("Home Page");
-
-      const speciesResult: SpeciesResult = await fetchSpecies();
-
-      setSpecies(speciesResult.results);
-      setNextPageUrl(speciesResult.next ?? "");
-    };
-
-    fetchData();
+    updateHeader("Home Page");
   }, [updateHeader]);
-
-  const loadMoreSpecies = async (e: MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    const speciesResult: SpeciesResult = await fetchSpecies(nextPageUrl);
-
-    setSpecies([...species, ...speciesResult.results]);
-    setNextPageUrl(speciesResult.next ?? "");
-  };
 
   return (
     <Container maxWidth="sm" className="page-container">
       <Card>
         <CardContent>
           <List>
-            {species.length > 0 ? (
+            {loading && <Loading />}
+            {!loading && species.length > 0 ? (
               species.map((s) => (
                 <ListItem
                   key={s.id}
@@ -63,7 +44,9 @@ const HomePage = ({ updateHeader }: Props): JSX.Element => {
                 </ListItem>
               ))
             ) : (
-              <Loading />
+              <ListItem>
+                <ListItemText primary="No species found!" />
+              </ListItem>
             )}
           </List>
           {nextPageUrl && (

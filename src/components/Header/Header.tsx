@@ -17,7 +17,7 @@ const Header = ({ headerTitle }: Props): JSX.Element => {
     <AppBar position="sticky">
       <Toolbar>
         {location.pathname !== "/" && (
-          <ClickableArrowBack onClick={() => history.push("/")}>
+          <ClickableArrowBack data-testid="btn-home" onClick={() => history.push("/")}>
             Home
           </ClickableArrowBack>
         )}

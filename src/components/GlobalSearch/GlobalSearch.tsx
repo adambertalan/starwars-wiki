@@ -10,7 +10,7 @@ import {
 } from "rxjs";
 import { fetchCharacters } from "../../api";
 import { Character } from "../../models/Character.model";
-import SearchDialog from "../SearchDialog";
+import SearchDialog from "../SearchDialog/SearchDialog";
 import { GlobalSearchInput, GlobalSearchResultPopup } from './styles';
 
 const GlobalSearch = (): JSX.Element => {
@@ -75,6 +75,7 @@ const GlobalSearch = (): JSX.Element => {
     <>
       <GlobalSearchInput
         ref={inputRef}
+        inputProps={{ "data-testid": "global-search-input" }}
         onClick={() => setSearchInputFocused(true)}
         onBlur={() => searchResultPopupBlur$.next()}
         placeholder="Search characters"
@@ -82,6 +83,7 @@ const GlobalSearch = (): JSX.Element => {
         onChange={handleSearch}
       />
       <GlobalSearchResultPopup
+        data-testid="global-search-result-popup"
         open={searchExpression.trim().length > 0 && searchInputFocused}
         anchorEl={inputRef.current}
       >

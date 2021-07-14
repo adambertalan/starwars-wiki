@@ -4,7 +4,7 @@ import { CircularProgress } from "@material-ui/core";
 const Loading = (): JSX.Element => {
   return (
     <div>
-      <CircularProgress />
+      <CircularProgress data-testid="spinner" />
     </div>
   );
 };
