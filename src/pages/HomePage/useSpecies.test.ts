@@ -1,6 +1,6 @@
 import { SpeciesResult } from "./../../models/SpeciesResult.model";
 import { cleanup } from "@testing-library/react";
-import { act, renderHook } from "@testing-library/react-hooks";
+import { renderHook } from "@testing-library/react-hooks";
 import { fetchSpecies } from "../../api";
 import { useSpecies } from "./useSpecies";
 
@@ -15,7 +15,7 @@ describe("useSpecies hook", () => {
     jest.unmock("../../api");
   });
 
-  xit("Should load the initial species", () => {
+  it("Should load the initial species", async () => {
     const fetchResult: SpeciesResult = {
       results: [],
       next: "",
@@ -24,17 +24,14 @@ describe("useSpecies hook", () => {
     };
     (fetchSpecies as jest.Mock).mockReturnValue(Promise.resolve(fetchResult));
 
-    let result: any;
-    // Testing a hook which calls an API unconditionally is not trivial
-    // Despite the fact that it is wrapped with act block, console error will still present about the missing wrapping
-    act(() => {
-      result = renderHook(() => useSpecies());
-    });
+    const { result, waitForNextUpdate } = renderHook(() => useSpecies());
 
-    const { loading, species, nextPageUrl, loadMoreSpecies } = result.current;
+    await waitForNextUpdate();
+
+    const { loading, species, nextPageUrl } = result.current;
 
     expect((fetchSpecies as jest.Mock).mock.calls.length).toBe(1);
-    expect(species).toBe([]);
+    expect(species).toStrictEqual([]);
     expect(nextPageUrl).toBe("");
     expect(loading).toBe(false);
   });
